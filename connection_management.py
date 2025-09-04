@@ -13,17 +13,12 @@ class ConnectionManagement:
         users = UserManagement.users
         current_user = UserManagement.get_current_user()
 
-    def find_user(self, user_id):
-        for user in self.users:
-            if user.id == user_id:
-                return user
-
 
     def send_message(self, user_id, message):
-        reciever = self.find_user(user_id)
+        receiver = UserManagement.find_user(user_id)
 
         new_message = Message(sender=self.current_user,
-                              receiver=reciever, message=message)
+                              receiver=receiver, message=message)
         self.messages.append(new_message)
 
 

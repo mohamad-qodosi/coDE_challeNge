@@ -1,23 +1,37 @@
 import UserManagement
 import User
-from message import Message, ReadableMessage
+from message import Message
 
 
-class MessageManagement:
+
+class ConnectionManagement:
+    users = []
+    messages = []
+    current_user = None
 
     def __init__(self):
-        self.messages: list[ReadableMessage] = []
+        users = UserManagement.users
+        current_user = UserManagement.get_current_user()
 
-    def send_message(self, sender, receiver, message):
-        new_message = ReadableMessage(sender=sender,
-                                      receiver=receiver,
-                                      message=message)
+
+    def send_message(self, user_id, message):
+        receiver = UserManagement.find_user(user_id)
+
+        new_message = Message(sender=self.current_user,
+                              receiver=receiver, message=message)
         self.messages.append(new_message)
 
-    def get_user_messages(self, receiver):
-        selected_list = []
-        for massage in self.messages:
-            if massage.get_receiver() == receiver and massage.is_read() == False:
-                selected_list.append(str(massage))
 
-        return '\n\n'.join(selected_list)
+    def get_messages(self, user):
+        return self.messages
+
+    def open_connect(self, user):
+        user.friends.append(self.current_user)
+
+
+    def close_connection(self, user):
+        user.friends.remove(self.current_user)
+
+
+    def get_friends(self):
+        return self.current_user.friends

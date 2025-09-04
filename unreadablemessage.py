@@ -6,10 +6,3 @@ messages = [
     {'dibadokht': 'this is third message'},
     {'danial': 'this is fourth message'},
 ]
-
-
-
-
-
-
-

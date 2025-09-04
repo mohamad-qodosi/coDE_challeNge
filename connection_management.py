@@ -14,9 +14,6 @@ class MessageManagement:
                                       message=message)
         self.messages.append(new_message)
 
-    def get_messages(self, user):
-        return self.messages
-
     def get_user_messages(self, receiver):
         selected_list = []
         for massage in self.messages:
